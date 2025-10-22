@@ -1,3 +1,3 @@
-# Echo Project
+# Echo Submodule
 
-This is the `echo` project within the monorepository.
+This is the README for the Echo submodule.
