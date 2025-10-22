@@ -1,1 +1,0 @@
-Coordinated commit: Updated main repo and submodule references (if any): style: Left-align profile heading in Echo submodule.
