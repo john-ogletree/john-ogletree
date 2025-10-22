@@ -6,7 +6,8 @@ on:
       - master # or main, depending on your default branch
 
 jobs:
-  sync-echo:
+  # Existing job: Submodule-to-Main Sync
+  sync-echo-to-main:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main repository
@@ -24,27 +25,60 @@ jobs:
         id: check_echo_changes
         run: |
           cd Echo
-          git status --porcelain > changes.txt
-          if [ -s changes.txt ]; then
+          # Check if the submodule's HEAD is different from its remote's HEAD
+          # This indicates changes were pushed directly to the submodule's remote
+          git fetch origin master:refs/remotes/origin/master || git fetch origin main:refs/remotes/origin/main
+          LOCAL_COMMIT=$(git rev-parse HEAD)
+          REMOTE_COMMIT=$(git rev-parse origin/master || git rev-parse origin/main)
+          if [ "$LOCAL_COMMIT" != "$REMOTE_COMMIT" ]; then
             echo "::set-output name=has_changes::true"
           else
             echo "::set-output name=has_changes::false"
           fi
         
-      - name: Commit and push changes in Echo submodule
-        if: steps.check_echo_changes.outputs.has_changes == 'true'
-        run: |
-          cd Echo
-          git add .
-          git commit -m "Automated: Sync changes from main repo workflow"
-          # Push to Echo's remote. Replace with actual URL if different.
-          # This assumes Echo has its own remote.
-          # You might need a PAT with repo scope for this if SUBMODULES_PAT is insufficient.
-          git push origin master # or main, depending on Echo's default branch
-
       - name: Update main repository submodule reference
         if: steps.check_echo_changes.outputs.has_changes == 'true'
         run: |
           git add Echo
-          git commit -m "Automated: Update Echo submodule reference"
+          git commit -m "Automated: Update Echo submodule reference from its remote"
           git push origin master # or main, depending on your default branch
+
+  # New job: Main-to-Submodule Sync
+  sync-main-to-echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main repository
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.SUBMODULES_PAT }} # Needs write access to submodule repo
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Check for local changes in Echo submodule within main repo
+        id: check_local_echo_changes
+        run: |
+          cd Echo
+          # Check if there are any uncommitted changes in the submodule's working tree
+          # or if the submodule's HEAD is different from its remote's HEAD
+          git fetch origin master:refs/remotes/origin/master || git fetch origin main:refs/remotes/origin/main
+          LOCAL_STATUS=$(git status --porcelain)
+          LOCAL_COMMIT=$(git rev-parse HEAD)
+          REMOTE_COMMIT=$(git rev-parse origin/master || git rev-parse origin/main)
+
+          if [ -n "$LOCAL_STATUS" ] || [ "$LOCAL_COMMIT" != "$REMOTE_COMMIT" ]; then
+            echo "::set-output name=has_local_changes::true"
+          else
+            echo "::set-output name=has_local_changes::false"
+          fi
+
+      - name: Commit and push changes from main repo to Echo submodule's remote
+        if: steps.check_local_echo_changes.outputs.has_local_changes == 'true'
+        run: |
+          cd Echo
+          git add .
+          git commit -m "Automated: Sync changes from main repo to Echo submodule"
+          git push origin master # or main, depending on Echo's default branch
