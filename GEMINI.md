@@ -13,19 +13,22 @@ This file serves as a dedicated space for project-specific instructions, context
 - For future changes, ensure commit messages are descriptive and follow project conventions.
 - Ensure everything is formatted correctly with an indentation of +1.
 
-## Submodule Synchronization
+## Submodule Management and Coordinated Commits
 
-To ensure proper synchronization between the main repository (`john-ogletree`) and its submodules (e.g., `Echo`), a local script `sync_echo_submodule.sh` has been created. This script handles both:
+To ensure proper synchronization and maintain a consistent history between the main repository (`john-ogletree`) and its submodules (e.g., `Echo`), follow these steps when both the main repository and a submodule have uncommitted changes:
 
-*   **Main-to-Submodule Sync:** Pushing changes made in the main repository's submodule directory to the submodule's remote.
-*   **Submodule-to-Main Sync:** Pulling new commits from the submodule's remote and updating the main repository's reference.
-
-**How to use `sync_echo_submodule.sh`:**
-
-1.  After making any changes in the main repository or directly within a submodule's directory (e.g., `Echo/`), save your changes.
-2.  Open your terminal in the root of the `john-ogletree` repository.
-3.  Run the script:
+1.  **Commit Submodule Changes First:** Navigate into the submodule's directory (e.g., `cd Echo`). Stage and commit any changes within the submodule. Push these changes to the submodule's remote repository.
     ```bash
-    ./sync_echo_submodule.sh
+    cd Echo
+    git add .
+    git commit -m "Descriptive commit message for submodule changes"
+    git push origin master # Or the appropriate branch
     ```
-    This script will automatically commit and push relevant changes to both the submodule's remote and the main repository.
+2.  **Update and Commit Main Repository:** Return to the main repository's root directory (e.g., `cd ..`). The main repository will now show that the submodule's reference has changed. Stage this change along with any other uncommitted changes in the main repository. Commit these changes with a message that ties both the main repo and submodule updates together. Push to the main repository's remote.
+    ```bash
+    cd ..
+    git add . # This will stage the updated submodule reference and any other main repo changes
+    git commit -m "Coordinated commit: Updated Echo submodule and other main repo changes"
+    git push origin master # Or the appropriate branch
+    ```
+This workflow ensures that the main repository always points to a committed state of the submodule, and that related changes are clearly linked in the commit history.
