@@ -28,6 +28,17 @@ This file serves as a dedicated space for project-specific instructions, context
 - For future changes, ensure commit messages are descriptive and follow project conventions.
 - Ensure everything is formatted correctly with an indentation of +1.
 
+## Commit Message Conventions
+
+To maintain a clear and consistent commit history, especially when dealing with submodules, please adhere to the following convention for commit messages in the main repository:
+
+*   **Prefix for Coordinated Commits:** When a commit involves updates to both the main repository and its submodules (or just the main repository while acknowledging the submodule context), the commit message should start with:
+    `Coordinated commit: Updated main repo and submodule references (if any)`
+    This prefix should be followed by a descriptive message detailing the specific changes made in that commit.
+
+    Example:
+    `Coordinated commit: Updated main repo and submodule references (if any): Implemented new feature X in main app and updated Echo submodule to latest version.`
+
 ## Submodule Management and Coordinated Commits
 
 To ensure proper synchronization and maintain a consistent history between the main repository (`john-ogletree`) and its submodules (e.g., `Echo`), follow these steps when managing changes:
