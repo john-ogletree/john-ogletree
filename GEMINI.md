@@ -12,3 +12,20 @@ This file serves as a dedicated space for project-specific instructions, context
 - Commit and push after every file change.
 - For future changes, ensure commit messages are descriptive and follow project conventions.
 - Ensure everything is formatted correctly with an indentation of +1.
+
+## Submodule Synchronization
+
+To ensure proper synchronization between the main repository (`john-ogletree`) and its submodules (e.g., `Echo`), a local script `sync_echo_submodule.sh` has been created. This script handles both:
+
+*   **Main-to-Submodule Sync:** Pushing changes made in the main repository's submodule directory to the submodule's remote.
+*   **Submodule-to-Main Sync:** Pulling new commits from the submodule's remote and updating the main repository's reference.
+
+**How to use `sync_echo_submodule.sh`:**
+
+1.  After making any changes in the main repository or directly within a submodule's directory (e.g., `Echo/`), save your changes.
+2.  Open your terminal in the root of the `john-ogletree` repository.
+3.  Run the script:
+    ```bash
+    ./sync_echo_submodule.sh
+    ```
+    This script will automatically commit and push relevant changes to both the submodule's remote and the main repository.
