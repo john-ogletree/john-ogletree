@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
-          token: ${{ secrets.GITHUB_TOKEN }} # Or a PAT with repo scope for pushing
+          token: ${{ secrets.SUBMODULES_PAT }} # Use SUBMODULES_PAT for pushing to submodules
 
       - name: Configure Git
         run: |
@@ -40,7 +40,8 @@ jobs:
           # Push to Echo's remote. Replace with actual URL if different.
           # This assumes Echo has its own remote.
           # You might need a PAT with repo scope for this if GITHUB_TOKEN is insufficient.
-          git push origin master # or main, depending on Echo's default branch
+          # Push to Echo's remote using the PAT. Replace 'github.com/your-username/Echo.git' with the actual remote URL of your Echo submodule.
+          git push https://oauth2:${{ secrets.SUBMODULES_PAT }}@github.com/your-username/Echo.git master # or main, depending on Echo's default branch
 
       - name: Update main repository submodule reference
         if: steps.check_echo_changes.outputs.has_changes == 'true'
