@@ -41,7 +41,7 @@ jobs:
           # This assumes Echo has its own remote.
           # You might need a PAT with repo scope for this if GITHUB_TOKEN is insufficient.
           # Push to Echo's remote using the PAT. Replace 'github.com/your-username/Echo.git' with the actual remote URL of your Echo submodule.
-          git push https://oauth2:${{ secrets.SUBMODULES_PAT }}@github.com/your-username/Echo.git master # or main, depending on Echo's default branch
+          git push https://oauth2:${{ secrets.SUBMODULES_PAT }}@github.com/john-ogletree/Echo.git master # or main, depending on Echo's default branch
 
       - name: Update main repository submodule reference
         if: steps.check_echo_changes.outputs.has_changes == 'true'
