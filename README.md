@@ -39,6 +39,17 @@ This project is open source, and I welcome contributions from the community! Whe
 
 Feel free to open an issue to discuss ideas or submit a pull request with your changes. Let's build something amazing together!
 
+## Commit Message Conventions
+
+To maintain a clear and consistent commit history, especially when dealing with submodules, please adhere to the following convention for commit messages in the main repository:
+
+*   **Prefix for Coordinated Commits:** When a commit involves updates to both the main repository and its submodules (or just the main repository while acknowledging the submodule context), the commit message should start with:
+    `Coordinated commit: Updated main repo and submodule references (if any)`
+    This prefix should be followed by a descriptive message detailing the specific changes made in that commit.
+
+    Example:
+    `Coordinated commit: Updated main repo and submodule references (if any): Implemented new feature X in main app and updated Echo submodule to latest version.`
+
 ## About Gemini
 
 This project is actively being developed and maintained with the assistance of Gemini, a large language model by Google. Gemini helps with various tasks, including code generation, refactoring, documentation, and general project management. Its involvement aims to streamline development, enhance code quality, and accelerate the integration of new projects into this monorepository.
