@@ -8,11 +8,6 @@
 
 This file serves as a dedicated space for project-specific instructions, context, and memories relevant to the Gemini agent's operation within the `codeline44` repository. It helps Gemini understand the project's nuances and maintain continuity across sessions.
 
-## Gemini Added Memories
-- Commit and push after every file change.
-- For future changes, ensure commit messages are descriptive and follow project conventions.
-- Ensure everything is formatted correctly with an indentation of +1.
-
 # GEMINI.md
 
 ***
@@ -22,11 +17,6 @@ This file serves as a dedicated space for project-specific instructions, context
 ***
 
 This file serves as a dedicated space for project-specific instructions, context, and memories relevant to the Gemini agent's operation within the `codeline44` repository. It helps Gemini understand the project's nuances and maintain continuity across sessions.
-
-## Gemini Added Memories
-- Commit and push after every file change.
-- For future changes, ensure commit messages are descriptive and follow project conventions.
-- Ensure everything is formatted correctly with an indentation of +1.
 
 ## Commit Message Conventions
 
