@@ -1,4 +1,4 @@
-# John Ogletree: The Central Hub (Monorepository)
+# John Ogletree: The Central Hub
 
 ***
 
@@ -8,7 +8,7 @@
 
 ## Welcome to My Digital Universe!
 
-This repository, `john-ogletree`, serves as the central monorepository for all my digital endeavors. Here, you'll find a consolidated collection of my work, ranging from personal websites and social media applications to various plugins and experimental projects. This approach allows for streamlined development, shared tooling, and a holistic view of my entire digital portfolio.
+I am still having trouble to get the mono-repository i want but in the meantime i am just going to edit each repository seperatly for the time being.
 
 ## What You'll Find Here
 
