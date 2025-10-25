@@ -1,6 +1,0 @@
-
-
-
-[submodule "Echo"]
-	path = Echo
-	url = https://github.com/john-ogletree/Echo.git
